@@ -1,7 +1,7 @@
 import 'package:attendanceapp/constant.dart';
 import 'package:attendanceapp/services/database_services.dart';
 import 'package:attendanceapp/services/helper.dart';
-import 'package:attendanceapp/widgets/widgets.dart';
+import 'package:attendanceapp/widgets/basic_snack_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

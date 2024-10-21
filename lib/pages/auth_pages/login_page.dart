@@ -4,7 +4,7 @@ import 'package:attendanceapp/pages/teacher_page.dart';
 import 'package:flutter/material.dart';
 import 'package:attendanceapp/constant.dart';
 import 'package:attendanceapp/services/auth_services.dart';
-import 'package:attendanceapp/widgets/widgets.dart';
+import 'package:attendanceapp/widgets/basic_snack_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

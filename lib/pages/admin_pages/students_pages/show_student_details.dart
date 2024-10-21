@@ -1,7 +1,7 @@
 import 'package:attendanceapp/constant.dart';
 import 'package:attendanceapp/pages/admin_pages/students_pages/student_attendance_with_date.dart';
 import 'package:attendanceapp/services/database_services.dart';
-import 'package:attendanceapp/widgets/widgets.dart';
+import 'package:attendanceapp/widgets/basic_snack_bar.dart';
 import 'package:flutter/material.dart';
 
 class ShowStudentDetails extends StatefulWidget {
