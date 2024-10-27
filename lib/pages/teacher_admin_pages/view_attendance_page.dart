@@ -72,6 +72,7 @@ class _ViewAttendancePageState extends State<ViewAttendancePage> {
                   .where('details',
                       isEqualTo:
                           'year_${widget.year}_${widget.dept}_${widget.section.toUpperCase()}')
+                  .orderBy("date")
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {

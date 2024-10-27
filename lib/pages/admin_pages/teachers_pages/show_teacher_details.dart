@@ -54,6 +54,7 @@ class _ShowTeacherDetailsState extends State<ShowTeacherDetails> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.primaryColor,
+          foregroundColor: Colors.white,
           title: const Text(
             "Teacher's details",
             style: TextStyle(color: Colors.white),
@@ -128,7 +129,7 @@ class _ShowTeacherDetailsState extends State<ShowTeacherDetails> {
                   decoration: InputDecoration(
                       hintText: "Id",
                       prefixIcon: Icon(
-                        Icons.abc,
+                        Icons.assignment_ind,
                         color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,

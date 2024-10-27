@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
   String? category;
 
   Future<bool> checkLogin() async {
-    loggedin = await Helper().getUserLoggedInStatus() == null ? false : true;
+    loggedin = await Helper().getUserLoggedInStatus() == false ? false : true;
     category = await Helper().gettingUserEmail();
     return loggedin;
   }

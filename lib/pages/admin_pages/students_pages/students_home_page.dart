@@ -1,6 +1,5 @@
 import 'package:attendanceapp/common/input_borders.dart';
 import 'package:attendanceapp/core/theme/app_colors.dart';
-import 'package:attendanceapp/pages/admin_pages/students_pages/add_student_page.dart';
 import 'package:attendanceapp/pages/admin_pages/students_pages/show_student_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -95,22 +94,6 @@ class _StudentsHomePageState extends State<StudentsHomePage> {
               ),
             ),
           ],
-        ),
-        bottomNavigationBar: Container(
-          padding: const EdgeInsets.all(10),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primaryColor,
-              foregroundColor: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AddStudentPage()),
-              );
-            },
-            child: const Text("Add student"),
-          ),
         ),
       ),
     );
