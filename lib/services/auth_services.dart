@@ -16,7 +16,7 @@ class AuthServices {
               email: email, password: password))
           .user!;
 
-      var data;
+      dynamic data;
 
       if (email.contains("@student")) {
         data = await DatabaseServices().gettingStudentData(user.uid);
