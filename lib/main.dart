@@ -27,28 +27,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool loggedin = false;
   String? category;
-  bool isloading = true;
-
-  @override
-  void initState() {
-    super.initState();
-
-    Helper().getUserLoggedInStatus().then(
-      (value) {
-        setState(() {
-          loggedin = value == null ? false : true;
-        });
-      },
-    );
-    Helper().gettingUserEmail().then(
-      (value) {
-        setState(() {
-          category = value;
-          isloading = false;
-        });
-      },
-    );
-  }
 
   Future<bool> checkLogin() async {
     loggedin = await Helper().getUserLoggedInStatus() == null ? false : true;
