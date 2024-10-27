@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
   Future<bool> checkLogin() async {
     loggedin = await Helper().getUserLoggedInStatus() == null ? false : true;
     category = await Helper().gettingUserEmail();
-    return true;
+    return loggedin;
   }
 
   Widget nextScreen() {
@@ -79,12 +79,13 @@ class _MyAppState extends State<MyApp> {
               color: AppColors.primaryColor,
             ),
           );
+        } else {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: loggedin ? nextScreen() : const LoginPage(),
+            theme: AppTheme.lightTheme,
+          );
         }
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: loggedin ? nextScreen() : const LoginPage(),
-          theme: AppTheme.lightTheme,
-        );
       },
     );
   }
