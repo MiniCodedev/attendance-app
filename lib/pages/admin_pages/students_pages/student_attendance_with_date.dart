@@ -1,4 +1,4 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
@@ -33,7 +33,7 @@ class _ViewStudentAttendancewithdateState
     return Scaffold(
       appBar: AppBar(
         title: const Text("View Attendance"),
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
       ),
       body: Column(
@@ -68,7 +68,8 @@ class _ViewStudentAttendancewithdateState
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
                       headingTextStyle: const TextStyle(color: Colors.white),
-                      headingRowColor: WidgetStatePropertyAll(primaryColor),
+                      headingRowColor:
+                          WidgetStatePropertyAll(AppColors.primaryColor),
                       columns: const [
                         DataColumn(label: Text('Date')),
                         DataColumn(label: Text('Hour 1')),

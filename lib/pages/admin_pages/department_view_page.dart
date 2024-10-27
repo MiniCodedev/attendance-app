@@ -1,4 +1,4 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/admin_pages/view_admin_attendance_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/student_list_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,7 +18,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
         title: const Text("Department"),
       ),
@@ -60,7 +60,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                       dept: doc["department"],
                       section: doc["section"],
                       icon: Icons.school_rounded,
-                      color: secondColor,
+                      color: AppColors.secondaryColor,
                       year: doc["year"],
                     ),
                   ],

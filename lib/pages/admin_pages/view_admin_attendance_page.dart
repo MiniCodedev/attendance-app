@@ -1,4 +1,5 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/common/input_borders.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/student_admin_pages/view_student_attendance_detail_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _ViewAdminAttendancePageState extends State<ViewAdminAttendancePage> {
       appBar: AppBar(
         title: const Text("View Attendance"),
         foregroundColor: Colors.white,
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primaryColor,
       ),
       body: Column(
         children: [
@@ -53,7 +54,7 @@ class _ViewAdminAttendancePageState extends State<ViewAdminAttendancePage> {
                   hintText: "Search by date (e.g., 20-10-2024)",
                   prefixIcon: Icon(
                     Icons.search_rounded,
-                    color: primaryColor,
+                    color: AppColors.primaryColor,
                   ),
                   errorBorder: errorBroder,
                   border: border,

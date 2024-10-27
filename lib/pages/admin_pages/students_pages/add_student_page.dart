@@ -1,4 +1,5 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/common/input_borders.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/services/auth_services.dart';
 import 'package:attendanceapp/widgets/basic_snack_bar.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: primaryColor,
+          backgroundColor: AppColors.primaryColor,
           title: const Text(
             "Add Student",
           ),
@@ -66,7 +67,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                         hintText: "Roll number",
                         prefixIcon: Icon(
                           Icons.assignment_ind,
-                          color: primaryColor,
+                          color: AppColors.primaryColor,
                         ),
                         errorBorder: errorBroder,
                         border: border,
@@ -91,7 +92,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                         hintText: "Name",
                         prefixIcon: Icon(
                           Icons.person,
-                          color: primaryColor,
+                          color: AppColors.primaryColor,
                         ),
                         errorBorder: errorBroder,
                         border: border,
@@ -123,8 +124,8 @@ class _AddStudentPageState extends State<AddStudentPage> {
                       decoration: BoxDecoration(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(50)),
-                          border: Border.fromBorderSide(
-                              BorderSide(color: primaryColor, width: 1))),
+                          border: Border.fromBorderSide(BorderSide(
+                              color: AppColors.primaryColor, width: 1))),
                       child: Row(
                         children: [
                           const Icon(
@@ -141,7 +142,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                                   : FontWeight.bold,
                               color: date == "Date of birth"
                                   ? Colors.grey[700]
-                                  : primaryColor,
+                                  : AppColors.primaryColor,
                             ),
                           ),
                         ],
@@ -188,7 +189,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                             hintText: "Department",
                             prefixIcon: Icon(
                               Icons.school_rounded,
-                              color: primaryColor,
+                              color: AppColors.primaryColor,
                             ),
                             errorBorder: errorBroder,
                             border: border,
@@ -243,7 +244,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                       hintText: "Section",
                       prefixIcon: Icon(
                         Icons.group,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,
@@ -273,7 +274,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                       hintText: "Year",
                       prefixIcon: Icon(
                         Icons.event,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,
@@ -303,7 +304,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                         hintText: "example@student.university.com",
                         prefixIcon: Icon(
                           Icons.email,
-                          color: primaryColor,
+                          color: AppColors.primaryColor,
                         ),
                         errorBorder: errorBroder,
                         border: border,
@@ -328,7 +329,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                       hintText: "Password",
                       prefixIcon: Icon(
                         Icons.lock_outline_rounded,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,
@@ -346,7 +347,8 @@ class _AddStudentPageState extends State<AddStudentPage> {
           padding: const EdgeInsets.all(10),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor, foregroundColor: Colors.white),
+                backgroundColor: AppColors.primaryColor,
+                foregroundColor: Colors.white),
             onPressed: () async {
               if (date == "Date of birth") {
                 showSnackBar(
@@ -361,8 +363,10 @@ class _AddStudentPageState extends State<AddStudentPage> {
                     Navigator.pop(context);
                     if (value == true) {
                       Navigator.of(context).pop();
-                      showSnackBar(context,
-                          "Successfully added student's detail.", primaryColor);
+                      showSnackBar(
+                          context,
+                          "Successfully added student's detail.",
+                          AppColors.primaryColor);
                     } else {
                       showSnackBar(context, value, Colors.red);
                     }

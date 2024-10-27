@@ -1,4 +1,5 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/common/input_borders.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/admin_pages/students_pages/student_attendance_with_date.dart';
 import 'package:attendanceapp/services/database_services.dart';
 import 'package:attendanceapp/widgets/basic_snack_bar.dart';
@@ -77,7 +78,7 @@ class _ShowStudentDetailsState extends State<ShowStudentDetails> {
 
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: primaryColor,
+            backgroundColor: AppColors.primaryColor,
             title: const Text(
               "Student's details",
             ),
@@ -124,11 +125,13 @@ class _ShowStudentDetailsState extends State<ShowStudentDetails> {
                                   showSnackBar(
                                       context,
                                       "Successfully student record removed.",
-                                      primaryColor);
+                                      AppColors.primaryColor);
                                 } else {
                                   Navigator.of(context).pop();
-                                  showSnackBar(context,
-                                      "Something went wrong..", primaryColor);
+                                  showSnackBar(
+                                      context,
+                                      "Something went wrong..",
+                                      AppColors.primaryColor);
                                 }
                               },
                             );
@@ -174,7 +177,7 @@ class _ShowStudentDetailsState extends State<ShowStudentDetails> {
                         hintText: "Roll number",
                         prefixIcon: Icon(
                           Icons.assignment_ind,
-                          color: primaryColor,
+                          color: AppColors.primaryColor,
                         ),
                         errorBorder: errorBroder,
                         border: border,
@@ -201,7 +204,7 @@ class _ShowStudentDetailsState extends State<ShowStudentDetails> {
                         hintText: "Name",
                         prefixIcon: Icon(
                           Icons.person,
-                          color: primaryColor,
+                          color: AppColors.primaryColor,
                         ),
                         errorBorder: errorBroder,
                         border: border,
@@ -253,7 +256,9 @@ class _ShowStudentDetailsState extends State<ShowStudentDetails> {
                             style: TextStyle(
                               fontWeight:
                                   isEn ? FontWeight.bold : FontWeight.w500,
-                              color: !isEn ? Colors.grey[500] : primaryColor,
+                              color: !isEn
+                                  ? Colors.grey[500]
+                                  : AppColors.primaryColor,
                             ),
                           ),
                         ],
@@ -302,7 +307,7 @@ class _ShowStudentDetailsState extends State<ShowStudentDetails> {
                             hintText: "Department",
                             prefixIcon: Icon(
                               Icons.school_rounded,
-                              color: primaryColor,
+                              color: AppColors.primaryColor,
                             ),
                             errorBorder: errorBroder,
                             border: border,
@@ -359,7 +364,7 @@ class _ShowStudentDetailsState extends State<ShowStudentDetails> {
                       hintText: "Section",
                       prefixIcon: Icon(
                         Icons.group,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,
@@ -391,7 +396,7 @@ class _ShowStudentDetailsState extends State<ShowStudentDetails> {
                       hintText: "Year",
                       prefixIcon: Icon(
                         Icons.event,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,
@@ -423,7 +428,7 @@ class _ShowStudentDetailsState extends State<ShowStudentDetails> {
                         hintText: "example@student.university.com",
                         prefixIcon: Icon(
                           Icons.email,
-                          color: primaryColor,
+                          color: AppColors.primaryColor,
                         ),
                         errorBorder: errorBroder,
                         border: border,
@@ -450,7 +455,7 @@ class _ShowStudentDetailsState extends State<ShowStudentDetails> {
                       hintText: "Password",
                       prefixIcon: Icon(
                         Icons.lock_outline_rounded,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,
@@ -485,7 +490,7 @@ class _ShowStudentDetailsState extends State<ShowStudentDetails> {
               Expanded(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
+                      backgroundColor: AppColors.primaryColor,
                       foregroundColor: Colors.white),
                   onPressed: isEn == false
                       ? null
@@ -505,7 +510,7 @@ class _ShowStudentDetailsState extends State<ShowStudentDetails> {
                                   showSnackBar(
                                       context,
                                       "Successfully updated student's detail.",
-                                      primaryColor);
+                                      AppColors.primaryColor);
                                 } else {
                                   showSnackBar(context,
                                       "Something went wrong..", Colors.red);

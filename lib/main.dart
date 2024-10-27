@@ -1,3 +1,5 @@
+import 'package:attendanceapp/core/theme/app_colors.dart';
+import 'package:attendanceapp/core/theme/app_theme.dart';
 import 'package:attendanceapp/pages/admin_page.dart';
 import 'package:attendanceapp/pages/auth_pages/login_page.dart';
 import 'package:attendanceapp/pages/student_page.dart';
@@ -6,7 +8,6 @@ import 'package:attendanceapp/services/helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'constant.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -49,6 +50,12 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+  Future<bool> checkLogin() async {
+    loggedin = await Helper().getUserLoggedInStatus() == null ? false : true;
+    category = await Helper().gettingUserEmail();
+    return true;
+  }
+
   Widget nextScreen() {
     if (category == null) {
       return Container();
@@ -63,21 +70,22 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return isloading
-        ? Center(
+    return FutureBuilder<bool>(
+      future: checkLogin(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
             child: CircularProgressIndicator(
-              color: primaryColor,
-            ),
-          )
-        : MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: loggedin ? nextScreen() : const LoginPage(),
-            theme: ThemeData(
-              fontFamily: "Poppins",
-              colorSchemeSeed: primaryColor,
-              brightness: Brightness.light,
-              useMaterial3: true,
+              color: AppColors.primaryColor,
             ),
           );
+        }
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: loggedin ? nextScreen() : const LoginPage(),
+          theme: AppTheme.lightTheme,
+        );
+      },
+    );
   }
 }

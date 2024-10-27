@@ -1,8 +1,9 @@
+import 'package:attendanceapp/common/input_borders.dart';
 import 'package:attendanceapp/pages/admin_page.dart';
 import 'package:attendanceapp/pages/student_page.dart';
 import 'package:attendanceapp/pages/teacher_page.dart';
 import 'package:flutter/material.dart';
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/services/auth_services.dart';
 import 'package:attendanceapp/widgets/basic_snack_bar.dart';
 
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                             "Attendance Portal",
                             style: TextStyle(
                               fontSize: width / 20,
-                              color: primaryColor,
+                              color: AppColors.primaryColor,
                               fontFamily: "Poppins",
                             ),
                           ),
@@ -119,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                               hintText: "Email",
                               prefixIcon: Icon(
                                 Icons.email,
-                                color: primaryColor,
+                                color: AppColors.primaryColor,
                               ),
                               errorBorder: errorBroder,
                               border: border,
@@ -156,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               prefixIcon: Icon(
                                 Icons.lock_outline_rounded,
-                                color: primaryColor,
+                                color: AppColors.primaryColor,
                               ),
                               errorBorder: errorBroder,
                               border: border,
@@ -174,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.all(20),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
+                      backgroundColor: AppColors.primaryColor,
                       foregroundColor: Colors.white),
                   onPressed: () {
                     submitButton();

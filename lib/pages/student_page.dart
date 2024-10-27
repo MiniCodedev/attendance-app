@@ -1,4 +1,4 @@
-import "package:attendanceapp/constant.dart";
+import "package:attendanceapp/core/theme/app_colors.dart";
 import "package:attendanceapp/pages/auth_pages/login_page.dart";
 import "package:attendanceapp/pages/student_admin_pages/student_home_page.dart";
 import "package:attendanceapp/pages/student_admin_pages/view_student_attendance_page.dart";
@@ -107,7 +107,7 @@ class _StudentPageState extends State<StudentPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
       ),
       drawer: Drawer(
@@ -115,7 +115,7 @@ class _StudentPageState extends State<StudentPage> {
           children: [
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(
-                color: primaryColor,
+                color: AppColors.primaryColor,
               ),
               accountName: Text(name.toUpperCase()),
               accountEmail: Text(email),
@@ -123,7 +123,8 @@ class _StudentPageState extends State<StudentPage> {
                 backgroundColor: Colors.white,
                 child: Text(
                   name == "" ? " " : name[0],
-                  style: TextStyle(fontSize: 40.0, color: primaryColor),
+                  style:
+                      TextStyle(fontSize: 40.0, color: AppColors.primaryColor),
                 ),
               ),
             ),
@@ -182,7 +183,7 @@ Widget cardTile(IconData icon, String text, double width) {
   return Container(
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-        color: primaryColor,
+        color: AppColors.primaryColor,
         borderRadius: const BorderRadius.all(Radius.circular(20))),
     child: Row(
       children: [

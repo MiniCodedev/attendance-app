@@ -1,4 +1,4 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/hour_attendance_page.dart';
 import 'package:attendanceapp/services/database_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -106,7 +106,7 @@ class _ViewAttendanceDetailPageState extends State<ViewAttendanceDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Attendance"),
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
@@ -176,7 +176,7 @@ class _ViewAttendanceDetailPageState extends State<ViewAttendanceDetailPage> {
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(50)),
                     border: Border.fromBorderSide(
-                        BorderSide(color: primaryColor, width: 2))),
+                        BorderSide(color: AppColors.primaryColor, width: 2))),
                 child: Row(
                   children: [
                     const Spacer(),
@@ -189,8 +189,9 @@ class _ViewAttendanceDetailPageState extends State<ViewAttendanceDetailPage> {
                     Text(
                       date,
                       style: TextStyle(
-                        color:
-                            date == "Select Date" ? Colors.black : primaryColor,
+                        color: date == "Select Date"
+                            ? Colors.black
+                            : AppColors.primaryColor,
                       ),
                     ),
                     const Spacer(),
@@ -296,7 +297,7 @@ class _HourTileWidgetState extends State<HourTileWidget> {
         child: GestureDetector(
           onTap: widget.onTap,
           child: Card(
-            color: primaryColor,
+            color: AppColors.primaryColor,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Container(

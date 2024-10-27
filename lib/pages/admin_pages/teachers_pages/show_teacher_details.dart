@@ -1,4 +1,5 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/common/input_borders.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/admin_pages/teachers_pages/add_teacher_page.dart';
 import 'package:attendanceapp/services/database_services.dart';
 import 'package:attendanceapp/widgets/basic_snack_bar.dart';
@@ -52,7 +53,7 @@ class _ShowTeacherDetailsState extends State<ShowTeacherDetails> {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: primaryColor,
+          backgroundColor: AppColors.primaryColor,
           title: const Text(
             "Teacher's details",
             style: TextStyle(color: Colors.white),
@@ -77,11 +78,13 @@ class _ShowTeacherDetailsState extends State<ShowTeacherDetails> {
                                   showSnackBar(
                                       context,
                                       "Successfully removed teacher record.",
-                                      primaryColor);
+                                      AppColors.primaryColor);
                                 } else {
                                   Navigator.of(context).pop();
-                                  showSnackBar(context,
-                                      "Something went wrong..", primaryColor);
+                                  showSnackBar(
+                                      context,
+                                      "Something went wrong..",
+                                      AppColors.primaryColor);
                                 }
                               },
                             );
@@ -126,7 +129,7 @@ class _ShowTeacherDetailsState extends State<ShowTeacherDetails> {
                       hintText: "Id",
                       prefixIcon: Icon(
                         Icons.abc,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,
@@ -153,7 +156,7 @@ class _ShowTeacherDetailsState extends State<ShowTeacherDetails> {
                       hintText: "Name",
                       prefixIcon: Icon(
                         Icons.person,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,
@@ -181,7 +184,7 @@ class _ShowTeacherDetailsState extends State<ShowTeacherDetails> {
                       hintText: "Email",
                       prefixIcon: Icon(
                         Icons.email,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,
@@ -208,7 +211,7 @@ class _ShowTeacherDetailsState extends State<ShowTeacherDetails> {
                     hintText: "Password",
                     prefixIcon: Icon(
                       Icons.lock_outline_rounded,
-                      color: primaryColor,
+                      color: AppColors.primaryColor,
                     ),
                     errorBorder: errorBroder,
                     border: border,
@@ -242,7 +245,7 @@ class _ShowTeacherDetailsState extends State<ShowTeacherDetails> {
               Expanded(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
+                      backgroundColor: AppColors.primaryColor,
                       foregroundColor: Colors.white),
                   onPressed: isEn == false
                       ? null
@@ -262,7 +265,7 @@ class _ShowTeacherDetailsState extends State<ShowTeacherDetails> {
                                   showSnackBar(
                                       context,
                                       "Successfully updated teacher's detail.",
-                                      primaryColor);
+                                      AppColors.primaryColor);
                                 } else {
                                   showSnackBar(context,
                                       "Something went wrong..", Colors.red);

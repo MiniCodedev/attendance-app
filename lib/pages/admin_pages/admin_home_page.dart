@@ -1,4 +1,4 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/admin_pages/department_view_page.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +35,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   margin: const EdgeInsets.symmetric(vertical: 8.0),
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: primaryColor,
+                    color: AppColors.primaryColor,
                     borderRadius: BorderRadius.circular(16.0),
                     boxShadow: const [
                       BoxShadow(
@@ -81,7 +81,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   margin: const EdgeInsets.symmetric(vertical: 8.0),
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: primaryColor,
+                    color: AppColors.primaryColor,
                     borderRadius: BorderRadius.circular(16.0),
                     boxShadow: const [
                       BoxShadow(
@@ -127,7 +127,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   margin: const EdgeInsets.symmetric(vertical: 8.0),
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: primaryColor,
+                    color: AppColors.primaryColor,
                     borderRadius: BorderRadius.circular(16.0),
                     boxShadow: const [
                       BoxShadow(
@@ -173,7 +173,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   margin: const EdgeInsets.symmetric(vertical: 8.0),
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: primaryColor,
+                    color: AppColors.primaryColor,
                     borderRadius: BorderRadius.circular(16.0),
                     boxShadow: const [
                       BoxShadow(

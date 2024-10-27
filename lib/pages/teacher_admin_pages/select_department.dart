@@ -1,4 +1,4 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/admin_pages/students_pages/add_student_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/attendance_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/student_list_page.dart';
@@ -57,7 +57,7 @@ class _SelectDepartmentPageState extends State<SelectDepartmentPage> {
                         dept: doc["department"],
                         section: doc["section"],
                         icon: Icons.school_rounded,
-                        color: secondColor,
+                        color: AppColors.secondaryColor,
                         year: doc["year"],
                       ),
                     ],
@@ -71,7 +71,7 @@ class _SelectDepartmentPageState extends State<SelectDepartmentPage> {
           padding: const EdgeInsets.all(10),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: primaryColor,
+              backgroundColor: AppColors.primaryColor,
               foregroundColor: Colors.white,
             ),
             onPressed: () {

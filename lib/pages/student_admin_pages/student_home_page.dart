@@ -1,6 +1,6 @@
-import 'package:attendanceapp/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 
 class StudentHomePage extends StatefulWidget {
   const StudentHomePage({
@@ -155,10 +155,10 @@ class _StudentHomePageState extends State<StudentHomePage> {
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: primaryColor,
+                                  color: AppColors.primaryColor,
                                 ),
                               ),
-                              progressColor: primaryColor,
+                              progressColor: AppColors.primaryColor,
                             ),
                           ),
                         ],
@@ -197,7 +197,7 @@ Widget cardTile(IconData icon, String text, double width) {
   return Container(
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-        color: primaryColor,
+        color: AppColors.primaryColor,
         borderRadius: const BorderRadius.all(Radius.circular(20))),
     child: Row(
       children: [

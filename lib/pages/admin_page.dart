@@ -1,4 +1,4 @@
-import "package:attendanceapp/constant.dart";
+import "package:attendanceapp/core/theme/app_colors.dart";
 import "package:attendanceapp/pages/admin_pages/admin_home_page.dart";
 import "package:attendanceapp/pages/admin_pages/students_pages/students_home_page.dart";
 import "package:attendanceapp/pages/admin_pages/teachers_pages/teachers_home_page.dart";
@@ -35,7 +35,7 @@ class _AdminPageState extends State<AdminPage> {
           title,
           style: const TextStyle(color: Colors.white),
         ),
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primaryColor,
       ),
       body: pages[selected],
       drawer: Drawer(
@@ -43,7 +43,7 @@ class _AdminPageState extends State<AdminPage> {
           children: [
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(
-                color: primaryColor,
+                color: AppColors.primaryColor,
               ),
               accountName: const Text("Admin"),
               accountEmail: const Text("admin@university.jpr"),
@@ -51,7 +51,8 @@ class _AdminPageState extends State<AdminPage> {
                 backgroundColor: Colors.white,
                 child: Text(
                   "A",
-                  style: TextStyle(fontSize: 40.0, color: primaryColor),
+                  style:
+                      TextStyle(fontSize: 40.0, color: AppColors.primaryColor),
                 ),
               ),
             ),

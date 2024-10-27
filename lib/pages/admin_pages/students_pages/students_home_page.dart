@@ -1,4 +1,5 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/common/input_borders.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/admin_pages/students_pages/add_student_page.dart';
 import 'package:attendanceapp/pages/admin_pages/students_pages/show_student_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,7 +30,7 @@ class _StudentsHomePageState extends State<StudentsHomePage> {
                     hintText: "Search by roll number",
                     prefixIcon: Icon(
                       Icons.search_rounded,
-                      color: primaryColor,
+                      color: AppColors.primaryColor,
                     ),
                     errorBorder: errorBroder,
                     border: border,
@@ -99,7 +100,7 @@ class _StudentsHomePageState extends State<StudentsHomePage> {
           padding: const EdgeInsets.all(10),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: primaryColor,
+              backgroundColor: AppColors.primaryColor,
               foregroundColor: Colors.white,
             ),
             onPressed: () {

@@ -1,4 +1,4 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/student_admin_pages/view_student_attendance_detail_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +48,7 @@ class _ViewStudentAttendancePageState extends State<ViewStudentAttendancePage> {
                 hintText: "Search by date (e.g., 20-10-2024)",
                 prefixIcon: Icon(
                   Icons.search,
-                  color: primaryColor,
+                  color: AppColors.primaryColor,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),

@@ -1,4 +1,5 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/common/input_borders.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/services/auth_services.dart';
 import 'package:attendanceapp/widgets/basic_snack_bar.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: primaryColor,
+          backgroundColor: AppColors.primaryColor,
           title: const Text(
             "Add Teacher",
             style: TextStyle(color: Colors.white),
@@ -50,7 +51,7 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
                       hintText: "Id",
                       prefixIcon: Icon(
                         Icons.assignment_ind,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,
@@ -75,7 +76,7 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
                       hintText: "Name",
                       prefixIcon: Icon(
                         Icons.person,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,
@@ -101,7 +102,7 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
                       hintText: "Email",
                       prefixIcon: Icon(
                         Icons.email,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,
@@ -126,7 +127,7 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
                     hintText: "Password",
                     prefixIcon: Icon(
                       Icons.lock_outline_rounded,
-                      color: primaryColor,
+                      color: AppColors.primaryColor,
                     ),
                     errorBorder: errorBroder,
                     border: border,
@@ -143,7 +144,8 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
           padding: const EdgeInsets.all(10),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor, foregroundColor: Colors.white),
+                backgroundColor: AppColors.primaryColor,
+                foregroundColor: Colors.white),
             onPressed: () async {
               if (formKey.currentState!.validate()) {
                 showLoadingDialog(context);
@@ -152,8 +154,10 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
                     Navigator.pop(context);
                     if (value == true) {
                       Navigator.of(context).pop();
-                      showSnackBar(context,
-                          "Successfully added teacher's detail.", primaryColor);
+                      showSnackBar(
+                          context,
+                          "Successfully added teacher's detail.",
+                          AppColors.primaryColor);
                     } else {
                       showSnackBar(context, value, Colors.red);
                     }

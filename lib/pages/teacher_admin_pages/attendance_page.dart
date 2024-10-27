@@ -1,4 +1,4 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/hour_attendance_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +85,7 @@ class _AttendancePageState extends State<AttendancePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Attendance"),
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
       ),
       body: Column(
@@ -113,7 +113,7 @@ class _AttendancePageState extends State<AttendancePage> {
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(50)),
                     border: Border.fromBorderSide(
-                        BorderSide(color: primaryColor, width: 2))),
+                        BorderSide(color: AppColors.primaryColor, width: 2))),
                 child: Row(
                   children: [
                     const Spacer(),
@@ -126,8 +126,9 @@ class _AttendancePageState extends State<AttendancePage> {
                     Text(
                       date,
                       style: TextStyle(
-                        color:
-                            date == "Select Date" ? Colors.black : primaryColor,
+                        color: date == "Select Date"
+                            ? Colors.black
+                            : AppColors.primaryColor,
                       ),
                     ),
                     const Spacer(),
@@ -227,7 +228,7 @@ class _HourTileWidgetState extends State<HourTileWidget> {
         child: GestureDetector(
           onTap: widget.onTap,
           child: Card(
-            color: primaryColor,
+            color: AppColors.primaryColor,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Container(

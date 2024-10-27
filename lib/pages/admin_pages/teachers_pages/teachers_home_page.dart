@@ -1,4 +1,5 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/common/input_borders.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/admin_pages/teachers_pages/add_teacher_page.dart';
 import 'package:attendanceapp/pages/admin_pages/teachers_pages/show_teacher_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -42,7 +43,7 @@ class _TeachersHomePageState extends State<TeachersHomePage> {
                     hintText: "Search by id",
                     prefixIcon: Icon(
                       Icons.search_rounded,
-                      color: primaryColor,
+                      color: AppColors.primaryColor,
                     ),
                     errorBorder: errorBroder,
                     border: border,
@@ -107,7 +108,7 @@ class _TeachersHomePageState extends State<TeachersHomePage> {
           padding: const EdgeInsets.all(10),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: primaryColor,
+              backgroundColor: AppColors.primaryColor,
               foregroundColor: Colors.white,
             ),
             onPressed: () {

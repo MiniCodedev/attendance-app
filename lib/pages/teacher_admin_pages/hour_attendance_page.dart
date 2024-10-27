@@ -1,4 +1,5 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/common/input_borders.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/services/database_services.dart';
 import 'package:attendanceapp/services/helper.dart';
 import 'package:attendanceapp/widgets/basic_snack_bar.dart';
@@ -130,7 +131,7 @@ class _HourAttendancePageState extends State<HourAttendancePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("${hours[widget.hour - 1]} Hour Attendance"),
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
       ),
       bottomNavigationBar: Container(
@@ -139,7 +140,7 @@ class _HourAttendancePageState extends State<HourAttendancePage> {
           icon: const Icon(Icons.cloud_upload_outlined),
           label: const Text("Save attendance"),
           style: ElevatedButton.styleFrom(
-            backgroundColor: primaryColor,
+            backgroundColor: AppColors.primaryColor,
             foregroundColor: Colors.white,
           ),
           onPressed: () {
@@ -161,7 +162,7 @@ class _HourAttendancePageState extends State<HourAttendancePage> {
                 if (value) {
                   Navigator.of(context).pop();
                   showSnackBar(context, "Successfully attendance uploaded.",
-                      primaryColor);
+                      AppColors.primaryColor);
                 } else {
                   showSnackBar(context, "Something went wrong..", Colors.red);
                 }
@@ -184,7 +185,7 @@ class _HourAttendancePageState extends State<HourAttendancePage> {
                       hintText: "Search by name or roll number",
                       prefixIcon: Icon(
                         Icons.search_rounded,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,

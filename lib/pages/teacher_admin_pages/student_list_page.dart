@@ -1,4 +1,5 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/common/input_borders.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/admin_pages/students_pages/show_student_details.dart';
 import 'package:attendanceapp/services/database_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -48,7 +49,7 @@ class _StudentListPageState extends State<StudentListPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Student List"),
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
       ),
       body: isLoading
@@ -65,7 +66,7 @@ class _StudentListPageState extends State<StudentListPage> {
                         hintText: "Search by name or roll number",
                         prefixIcon: Icon(
                           Icons.search_rounded,
-                          color: primaryColor,
+                          color: AppColors.primaryColor,
                         ),
                         errorBorder: errorBroder,
                         border: border,

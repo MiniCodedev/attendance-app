@@ -1,4 +1,5 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/common/input_borders.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -115,7 +116,7 @@ class _StudentHourAttendancePageState extends State<StudentHourAttendancePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("${hours[widget.hour - 1]} Hour Attendance"),
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
       ),
       body: isLoading
@@ -132,7 +133,7 @@ class _StudentHourAttendancePageState extends State<StudentHourAttendancePage> {
                       hintText: "Search by name or roll number",
                       prefixIcon: Icon(
                         Icons.search_rounded,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                       errorBorder: errorBroder,
                       border: border,

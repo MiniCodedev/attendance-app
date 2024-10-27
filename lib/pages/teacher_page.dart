@@ -1,4 +1,4 @@
-import 'package:attendanceapp/constant.dart';
+import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/auth_pages/login_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/select_department.dart';
 import 'package:attendanceapp/services/auth_services.dart';
@@ -41,7 +41,7 @@ class _TeacherPageState extends State<TeacherPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Department'),
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
       ),
       drawer: Drawer(
@@ -49,7 +49,7 @@ class _TeacherPageState extends State<TeacherPage> {
           children: [
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(
-                color: primaryColor,
+                color: AppColors.primaryColor,
               ),
               accountName: Text(name.toUpperCase()),
               accountEmail: Text(email),
@@ -57,7 +57,8 @@ class _TeacherPageState extends State<TeacherPage> {
                 backgroundColor: Colors.white,
                 child: Text(
                   name == "" ? " " : name[0],
-                  style: TextStyle(fontSize: 40.0, color: primaryColor),
+                  style:
+                      TextStyle(fontSize: 40.0, color: AppColors.primaryColor),
                 ),
               ),
             ),
