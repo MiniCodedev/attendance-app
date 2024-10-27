@@ -36,8 +36,8 @@ dependencies:
   firebase_storage: ^12.0.1
   flutter:
     sdk: flutter
-  flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.3.7
+  flutter_launcher_icons: ^0.14.1
+  flutter_native_splash: ^2.4.2
   intl: ^0.19.0
   percent_indicator: ^4.2.3
   shared_preferences: ^2.2.3
@@ -48,13 +48,20 @@ dev_dependencies:
     sdk: flutter
 
 
-flutter_icons:
-  android: true
-  image_path: "assets/images/icon.png"
-
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/images/icon.png
+  image: assets/images/splash1.png
+
+  android_12:
+    color: "#ffffff"
+    image: assets/images/splash2.png
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/icon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/icon.png"
 
 
 
