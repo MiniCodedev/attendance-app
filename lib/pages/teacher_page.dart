@@ -1,6 +1,8 @@
 import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/auth_pages/login_page.dart';
-import 'package:attendanceapp/pages/teacher_admin_pages/select_department.dart';
+import 'package:attendanceapp/pages/teacher_admin_pages/od_and_leave_page.dart';
+import 'package:attendanceapp/pages/teacher_admin_pages/select_class_page.dart';
+import 'package:attendanceapp/pages/teacher_admin_pages/view_timetable_page.dart';
 import 'package:attendanceapp/services/auth_services.dart';
 import 'package:attendanceapp/services/helper.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +16,14 @@ class TeacherPage extends StatefulWidget {
 
 class _TeacherPageState extends State<TeacherPage> {
   String email = "";
-  String name = "";
-  int selected = 1;
+  String name = "Unknown";
+  int selected = 0;
+  List pages = [
+    const SelectClassPage(),
+    const ODAndLeavePage(),
+    const ViewTimetablePage()
+  ];
+  List<String> appbarTitle = ["Overview", "OD & Leave Permission", "Timetable"];
 
   @override
   void initState() {
@@ -40,7 +48,7 @@ class _TeacherPageState extends State<TeacherPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Department'),
+        title: Text(appbarTitle[selected]),
         backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
       ),
@@ -51,7 +59,8 @@ class _TeacherPageState extends State<TeacherPage> {
               decoration: BoxDecoration(
                 color: AppColors.primaryColor,
               ),
-              accountName: Text(name.toUpperCase()),
+              accountName: Text(
+                  "${name[0].toUpperCase()}${name.substring(1).toLowerCase()}"),
               accountEmail: Text(email),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -63,6 +72,17 @@ class _TeacherPageState extends State<TeacherPage> {
               ),
             ),
             ListTile(
+              selected: selected == 0 ? true : false,
+              onTap: () {
+                setState(() {
+                  selected = 0;
+                });
+                Navigator.pop(context);
+              },
+              leading: const Icon(Icons.home),
+              title: const Text("Overview"),
+            ),
+            ListTile(
               selected: selected == 1 ? true : false,
               onTap: () {
                 setState(() {
@@ -70,8 +90,8 @@ class _TeacherPageState extends State<TeacherPage> {
                 });
                 Navigator.pop(context);
               },
-              leading: const Icon(Icons.looks_one),
-              title: const Text("First Year"),
+              leading: const Icon(Icons.assignment),
+              title: const Text("OD & Leave Permission"),
             ),
             ListTile(
               selected: selected == 2 ? true : false,
@@ -81,30 +101,8 @@ class _TeacherPageState extends State<TeacherPage> {
                 });
                 Navigator.pop(context);
               },
-              leading: const Icon(Icons.looks_two),
-              title: const Text("Second Year"),
-            ),
-            ListTile(
-              selected: selected == 3 ? true : false,
-              onTap: () {
-                setState(() {
-                  selected = 3;
-                });
-                Navigator.pop(context);
-              },
-              leading: const Icon(Icons.looks_3),
-              title: const Text("Third Year"),
-            ),
-            ListTile(
-              selected: selected == 4 ? true : false,
-              onTap: () {
-                setState(() {
-                  selected = 4;
-                });
-                Navigator.pop(context);
-              },
-              leading: const Icon(Icons.looks_4),
-              title: const Text("Fourth Year"),
+              leading: const Icon(Icons.table_chart_rounded),
+              title: const Text("TimeTable"),
             ),
             Expanded(
               child: Align(
@@ -124,9 +122,7 @@ class _TeacherPageState extends State<TeacherPage> {
           ],
         ),
       ),
-      body: SelectDepartmentPage(
-        year: selected,
-      ),
+      body: pages[selected],
     );
   }
 }
