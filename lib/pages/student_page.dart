@@ -1,7 +1,10 @@
 import "package:attendanceapp/core/theme/app_colors.dart";
 import "package:attendanceapp/pages/auth_pages/login_page.dart";
+import "package:attendanceapp/pages/student_admin_pages/od_and_permission_page.dart";
 import "package:attendanceapp/pages/student_admin_pages/student_home_page.dart";
+import "package:attendanceapp/pages/student_admin_pages/view_result_page.dart";
 import "package:attendanceapp/pages/student_admin_pages/view_student_attendance_page.dart";
+import "package:attendanceapp/pages/student_admin_pages/view_timetable_page.dart";
 import "package:attendanceapp/services/auth_services.dart";
 import "package:attendanceapp/services/database_services.dart";
 import "package:attendanceapp/services/helper.dart";
@@ -33,7 +36,13 @@ class _StudentPageState extends State<StudentPage> {
   List<Widget> pages = [];
 
   int selected = 0;
-  String title = "Student Portal";
+  List<String> titleList = [
+    "Overview",
+    "View result",
+    "View attedance",
+    "View timetable",
+    "OD & Leave Permission",
+  ];
 
   List<String> years = [
     "First Year",
@@ -88,8 +97,11 @@ class _StudentPageState extends State<StudentPage> {
                       section: section,
                       totalWorkingDays: totalWorkingDays,
                     ),
+                    const ViewResultPage(),
                     ViewStudentAttendancePage(
                         year: year, dept: department, section: section),
+                    const ViewTimetablePage(),
+                    const OdAndPermissionPage(),
                   ];
                   isLoading = false;
                 });
@@ -99,14 +111,14 @@ class _StudentPageState extends State<StudentPage> {
         );
       },
     );
+    attendancePercentage = (presentDays / totalWorkingDays) * 100;
   }
 
   @override
   Widget build(BuildContext context) {
-    attendancePercentage = (presentDays / totalWorkingDays) * 100;
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(titleList[selected]),
         backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
       ),
@@ -132,12 +144,11 @@ class _StudentPageState extends State<StudentPage> {
               selected: selected == 0,
               onTap: () {
                 setState(() {
-                  title = "Student Portal";
                   selected = 0;
                 });
                 Navigator.of(context).pop();
               },
-              title: const Text("Student Portal"),
+              title: const Text("Overview"),
               leading: const Icon(Icons.home_rounded),
             ),
             ListTile(
@@ -145,11 +156,43 @@ class _StudentPageState extends State<StudentPage> {
               onTap: () {
                 setState(() {
                   selected = 1;
-                  title = "Attendance details";
                 });
                 Navigator.of(context).pop();
               },
-              title: const Text("Attendance details"),
+              title: const Text("View result"),
+              leading: const Icon(Icons.bar_chart),
+            ),
+            ListTile(
+              selected: selected == 2,
+              onTap: () {
+                setState(() {
+                  selected = 2;
+                });
+                Navigator.of(context).pop();
+              },
+              title: const Text("View attendance"),
+              leading: const Icon(Icons.event_available),
+            ),
+            ListTile(
+              selected: selected == 3,
+              onTap: () {
+                setState(() {
+                  selected = 3;
+                });
+                Navigator.of(context).pop();
+              },
+              title: const Text("View timetable"),
+              leading: const Icon(Icons.table_chart_rounded),
+            ),
+            ListTile(
+              selected: selected == 4,
+              onTap: () {
+                setState(() {
+                  selected = 4;
+                });
+                Navigator.of(context).pop();
+              },
+              title: const Text("OD & Leave Permission"),
               leading: const Icon(Icons.assignment),
             ),
             Expanded(
