@@ -1,5 +1,6 @@
 import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/attendance_page.dart';
+import 'package:attendanceapp/pages/teacher_admin_pages/hour_attendance_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/student_list_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/view_attendance_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -120,6 +121,7 @@ class _SelectClassPageState extends State<SelectClassPage> {
                           itemBuilder: (context, index) {
                             var doc = uniqueDepartments[index];
                             return Department(
+                              hour: index + 1,
                               dept: "${doc["department"]}",
                               section: doc["section"],
                               icon: Icons.school_rounded,
@@ -358,6 +360,7 @@ class Department extends StatefulWidget {
   final Color color;
   final String section;
   final int year;
+  final int hour;
 
   const Department({
     super.key,
@@ -366,6 +369,7 @@ class Department extends StatefulWidget {
     required this.color,
     required this.section,
     required this.year,
+    required this.hour,
   });
 
   @override
@@ -461,11 +465,16 @@ class _DepartmentState extends State<Department> {
                         optionName: "Register attendance",
                         icon: Icons.assignment_add,
                         onTap: () {
+                          var dateTime = DateTime.now();
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => AttendancePage(
-                                year: widget.year,
-                                dept: widget.dept,
-                                section: widget.section),
+                            builder: (context) => HourAttendancePage(
+                              hour: widget.hour,
+                              dept: widget.dept,
+                              section: widget.section,
+                              year: widget.year,
+                              date:
+                                  "${dateTime.day.toString().length == 1 ? "0${dateTime.day}" : dateTime.day.toString()}-${dateTime.month.toString().length == 1 ? "0${dateTime.month}" : dateTime.month.toString()}-${dateTime.year}",
+                            ),
                           ));
                         }),
                     OptionWidget(
