@@ -162,17 +162,17 @@ class _StudentPageState extends State<StudentPage> {
               title: const Text("View result"),
               leading: const Icon(Icons.bar_chart),
             ),
-            ListTile(
-              selected: selected == 2,
-              onTap: () {
-                setState(() {
-                  selected = 2;
-                });
-                Navigator.of(context).pop();
-              },
-              title: const Text("View attendance"),
-              leading: const Icon(Icons.event_available),
-            ),
+            // ListTile(
+            //   selected: selected == 2,
+            //   onTap: () {
+            //     setState(() {
+            //       selected = 2;
+            //     });
+            //     Navigator.of(context).pop();
+            //   },
+            //   title: const Text("View attendance"),
+            //   leading: const Icon(Icons.event_available),
+            // ),
             ListTile(
               selected: selected == 3,
               onTap: () {
