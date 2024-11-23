@@ -22,11 +22,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool loggedin = false;
+  var loggedin = false;
   String? category;
 
   Future<bool> checkLogin() async {
-    loggedin = await Helper().getUserLoggedInStatus() == false ? false : true;
+    loggedin = (await Helper().getUserLoggedInStatus())!;
     category = await Helper().gettingUserEmail();
     return loggedin;
   }
@@ -45,23 +45,23 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<bool>(
-      future: checkLogin(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(
-              color: AppColors.primaryColor,
-            ),
-          );
-        } else {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: loggedin ? nextScreen() : const LoginPage(),
-            theme: AppTheme.lightTheme,
-          );
-        }
-      },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      home: FutureBuilder<bool>(
+        future: checkLogin(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primaryColor,
+              ),
+            );
+          } else {
+            return loggedin ? nextScreen() : const LoginPage();
+          }
+        },
+      ),
     );
   }
 }
