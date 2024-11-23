@@ -33,7 +33,7 @@ class AuthServices {
         await helperFunction.saveUIDKey(data["rollno"]);
       } else {
         await helperFunction.saveUserNameKey(data["name"]);
-        await helperFunction.saveUIDKey(data["id"]);
+        await helperFunction.saveUIDKey(data["uid"]);
       }
 
       return true;

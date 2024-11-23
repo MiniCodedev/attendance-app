@@ -1,12 +1,25 @@
 import 'package:attendanceapp/core/theme/app_colors.dart';
+import 'package:attendanceapp/pages/student_admin_pages/view_student_attendance_detail_page.dart';
+import 'package:attendanceapp/services/database_services.dart';
 import 'package:flutter/material.dart';
 
 class ViewPermissionLetterPage extends StatefulWidget {
-  const ViewPermissionLetterPage(
-      {super.key, required this.name, required this.rollno});
+  const ViewPermissionLetterPage({
+    super.key,
+    required this.name,
+    required this.rollno,
+    required this.content,
+    required this.sub,
+    required this.date,
+    required this.id,
+  });
 
   final String name;
   final String rollno;
+  final String sub;
+  final String content;
+  final String date;
+  final String id;
 
   @override
   State<ViewPermissionLetterPage> createState() =>
@@ -14,6 +27,7 @@ class ViewPermissionLetterPage extends StatefulWidget {
 }
 
 class _ViewPermissionLetterPageState extends State<ViewPermissionLetterPage> {
+  DatabaseServices databaseServices = DatabaseServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,27 +54,35 @@ class _ViewPermissionLetterPageState extends State<ViewPermissionLetterPage> {
                     height: 5,
                   ),
                   titleWidget(text: "Date: "),
-                  contentWidget(textContent: "10/10/2024"),
+                  contentWidget(textContent: widget.date),
                   const SizedBox(
                     height: 5,
                   ),
                   titleWidget(text: "Sub: "),
-                  contentWidget(
-                      textContent: "Requesting permission for going to home"),
+                  contentWidget(textContent: widget.sub),
                   const SizedBox(
                     height: 5,
                   ),
                   titleWidget(text: "Respected Sir/Madam, "),
                   contentWidget(
-                    textContent:
-                        "I am requesting you to grant me permission for going out of hostel from 12/11/2024 - 11/11/2024 to meet our clients. Please kindly grant me the permission.\n\nYours Faithfully, \n     ${widget.name}",
+                    textContent: widget.content,
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   Center(
                     child: FilledButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showLoadingDialog(context);
+                        databaseServices
+                            .updatePermission(id: widget.id, status: "admin")
+                            .then(
+                          (value) {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                        );
+                      },
                       child: const Text(
                         "Accept & Forward to Dean",
                       ),
@@ -68,7 +90,17 @@ class _ViewPermissionLetterPageState extends State<ViewPermissionLetterPage> {
                   ),
                   Center(
                     child: FilledButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showLoadingDialog(context);
+                        databaseServices
+                            .updatePermission(id: widget.id, status: false)
+                            .then(
+                          (value) {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                        );
+                      },
                       style: const ButtonStyle(
                           backgroundColor: WidgetStatePropertyAll(Colors.red)),
                       child: const Text(

@@ -4,6 +4,7 @@ import 'package:attendanceapp/pages/teacher_admin_pages/od_and_leave_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/select_class_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/view_timetable_page.dart';
 import 'package:attendanceapp/services/auth_services.dart';
+import 'package:attendanceapp/services/database_services.dart';
 import 'package:attendanceapp/services/helper.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,6 @@ class _TeacherPageState extends State<TeacherPage> {
   List pages = [
     const SelectClassPage(),
     const ViewTimetablePage(),
-    const ODAndLeavePage(),
   ];
   List<String> appbarTitle = [
     "Overview",
@@ -29,23 +29,34 @@ class _TeacherPageState extends State<TeacherPage> {
     "OD & Leave Permission",
   ];
 
+  Future<bool> _initializeUserData() async {
+    final userName = await Helper().gettingUserName();
+    final userEmail = await Helper().gettingUserEmail();
+    final userUid = await Helper().gettingUserUid();
+
+    setState(() {
+      name = userName;
+      email = userEmail ?? "";
+    });
+
+    if (userUid != null) {
+      var data = await DatabaseServices().gettingTeacherData(userUid);
+      pages = [
+        const SelectClassPage(),
+        const ViewTimetablePage(),
+        ODAndLeavePage(
+          classDetails: data!.data()!["assignedClass"],
+        ),
+      ];
+    }
+
+    return true;
+  }
+
   @override
   void initState() {
     super.initState();
-    Helper().gettingUserName().then(
-      (value) {
-        setState(() {
-          name = value;
-        });
-      },
-    );
-    Helper().gettingUserEmail().then(
-      (value) {
-        setState(() {
-          email = value!;
-        });
-      },
-    );
+    _initializeUserData();
   }
 
   @override

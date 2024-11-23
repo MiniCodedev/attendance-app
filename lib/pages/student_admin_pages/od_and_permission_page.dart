@@ -53,7 +53,6 @@ class _OdAndPermissionPageState extends State<OdAndPermissionPage> {
             itemBuilder: (context, index) {
               Map data_ = data![index].data() as Map;
               String sub = data_["sub"];
-
               Timestamp timestamp = data_['date'] ?? Timestamp(1, 1);
               DateTime dateTime = timestamp.toDate();
               String date =
@@ -61,13 +60,17 @@ class _OdAndPermissionPageState extends State<OdAndPermissionPage> {
               String content = data_["content"];
               String name = data_["name"];
               String rollno = data_["rollno"];
-              String status = data_["status"] == null
-                  ? "Pending"
-                  : data_["status"] == "rejected"
-                      ? "Rejected"
-                      : data_["status"] == "teacher"
-                          ? "Approved by teacher"
-                          : "Approved by Dean";
+              String status = "";
+              switch (data_["status"]) {
+                case false:
+                  status = "Rejected";
+                  break;
+                case true:
+                  status = "Approved";
+                  break;
+                default:
+                  status = "Pending";
+              }
               return ListTile(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -82,7 +85,16 @@ class _OdAndPermissionPageState extends State<OdAndPermissionPage> {
                 },
                 leading: const Icon(Icons.assignment_rounded),
                 title: Text(sub),
-                subtitle: Text(status),
+                subtitle: Text(
+                  status,
+                  style: TextStyle(
+                    color: status == "Pending"
+                        ? null
+                        : status != "Approved"
+                            ? Colors.red
+                            : Colors.green,
+                  ),
+                ),
                 trailing: const Icon(Icons.arrow_forward_ios_rounded),
               );
             },

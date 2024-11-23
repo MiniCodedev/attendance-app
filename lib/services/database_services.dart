@@ -228,7 +228,8 @@ class DatabaseServices {
     return percentageMap;
   }
 
-  Future gettingTeacherData(String uid) async {
+  Future<DocumentSnapshot<Map<String, dynamic>>>? gettingTeacherData(
+      String uid) async {
     final data = await teachersCollection.doc(uid).get();
     return data;
   }
@@ -259,7 +260,7 @@ class DatabaseServices {
     return [percentage, count, total - count, total];
   }
 
-  Future addOdandLeave({
+  Future<bool> addOdandLeave({
     required String name,
     required String email,
     required String sub,
@@ -280,6 +281,16 @@ class DatabaseServices {
         "rollno": rollno,
         "status": null,
       });
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> updatePermission({required String id, required status}) async {
+    try {
+      await odAndLeaveCollection.doc(id).update({"status": status});
 
       return true;
     } catch (e) {
