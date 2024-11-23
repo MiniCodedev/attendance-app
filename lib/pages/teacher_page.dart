@@ -20,10 +20,14 @@ class _TeacherPageState extends State<TeacherPage> {
   int selected = 0;
   List pages = [
     const SelectClassPage(),
+    const ViewTimetablePage(),
     const ODAndLeavePage(),
-    const ViewTimetablePage()
   ];
-  List<String> appbarTitle = ["Overview", "OD & Leave Permission", "Timetable"];
+  List<String> appbarTitle = [
+    "Overview",
+    "Timetable",
+    "OD & Leave Permission",
+  ];
 
   @override
   void initState() {
@@ -90,8 +94,8 @@ class _TeacherPageState extends State<TeacherPage> {
                 });
                 Navigator.pop(context);
               },
-              leading: const Icon(Icons.assignment),
-              title: const Text("OD & Leave Permission"),
+              leading: const Icon(Icons.table_chart_rounded),
+              title: const Text("TimeTable"),
             ),
             ListTile(
               selected: selected == 2 ? true : false,
@@ -101,8 +105,8 @@ class _TeacherPageState extends State<TeacherPage> {
                 });
                 Navigator.pop(context);
               },
-              leading: const Icon(Icons.table_chart_rounded),
-              title: const Text("TimeTable"),
+              leading: const Icon(Icons.assignment),
+              title: const Text("OD & Leave Permission"),
             ),
             Expanded(
               child: Align(

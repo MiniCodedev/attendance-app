@@ -63,9 +63,11 @@ class _OdAndPermissionPageState extends State<OdAndPermissionPage> {
               String rollno = data_["rollno"];
               String status = data_["status"] == null
                   ? "Pending"
-                  : data_["status"] == "teacher"
-                      ? "Approved by teacher"
-                      : "Approved by Dean";
+                  : data_["status"] == "rejected"
+                      ? "Rejected"
+                      : data_["status"] == "teacher"
+                          ? "Approved by teacher"
+                          : "Approved by Dean";
               return ListTile(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
