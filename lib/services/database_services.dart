@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class DatabaseServices {
   final teachersCollection = FirebaseFirestore.instance.collection("teachers");
   final studentsCollection = FirebaseFirestore.instance.collection("students");
+  final odAndLeaveCollection =
+      FirebaseFirestore.instance.collection("odAndLeave");
   final attendancesCollection =
       FirebaseFirestore.instance.collection("attendances");
 
@@ -255,5 +257,33 @@ class DatabaseServices {
     }
     double percentage = (count / total) * 100;
     return [percentage, count, total - count, total];
+  }
+
+  Future addOdandLeave({
+    required String name,
+    required String email,
+    required String sub,
+    required String content,
+    required String year,
+    required String dept,
+    required String section,
+    required String rollno,
+  }) async {
+    try {
+      await odAndLeaveCollection.doc().set({
+        "date": FieldValue.serverTimestamp(),
+        "classdetails": 'year_${year}_${dept}_${section.toUpperCase()}',
+        "sub": sub,
+        "content": content,
+        "name": name,
+        "email": email,
+        "rollno": rollno,
+        "status": null,
+      });
+
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

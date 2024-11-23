@@ -32,6 +32,7 @@ class _StudentPageState extends State<StudentPage> {
   String section = "A";
   String rollno = "";
   String password = "";
+  String uid = "";
 
   List<Widget> pages = [];
 
@@ -61,57 +62,73 @@ class _StudentPageState extends State<StudentPage> {
   @override
   void initState() {
     super.initState();
-    Helper().gettingUserEmail().then(
-      (value) {
-        DatabaseServices().getStudentInformation(value ?? "").then(
-          (value) {
-            name = value["name"];
-            email = value["email"];
-            year = value["year"];
-            section = value["section"];
-            department = value["department"];
-            rollno = value["rollno"];
-            password = value["password"];
-            DatabaseServices()
-                .getStudentAttendance(
-                    'year_${year}_${department}_${section.toUpperCase()}',
-                    value["uid"])
-                .then(
-              (value) {
-                attendancePercentage = value[0];
-                presentDays = value[1];
-                absentDays = value[2];
-                totalWorkingDays = value[3];
-                setState(() {
-                  pages = [
-                    StudentHomePage(
-                      name: name,
-                      email: email,
-                      department: department,
-                      year: year,
-                      presentDays: presentDays,
-                      absentDays: absentDays,
-                      attendancePercentage: attendancePercentage,
-                      password: password,
-                      rollno: rollno,
-                      section: section,
-                      totalWorkingDays: totalWorkingDays,
-                    ),
-                    const ViewResultPage(),
-                    ViewStudentAttendancePage(
-                        year: year, dept: department, section: section),
-                    const ViewTimetablePage(),
-                    const OdAndPermissionPage(),
-                  ];
-                  isLoading = false;
-                });
-              },
-            );
-          },
+    _initializeData();
+  }
+
+  Future<void> _initializeData() async {
+    try {
+      String? userEmail = await Helper().gettingUserEmail();
+      if (userEmail != null) {
+        final studentInfo =
+            await DatabaseServices().getStudentInformation(userEmail);
+        setState(() {
+          name = studentInfo["name"];
+          email = studentInfo["email"];
+          year = studentInfo["year"];
+          section = studentInfo["section"];
+          department = studentInfo["department"];
+          rollno = studentInfo["rollno"];
+          password = studentInfo["password"];
+        });
+
+        final attendanceInfo = await DatabaseServices().getStudentAttendance(
+          'year_${year}_${department}_${section.toUpperCase()}',
+          studentInfo["uid"],
         );
-      },
-    );
-    attendancePercentage = (presentDays / totalWorkingDays) * 100;
+
+        setState(() {
+          attendancePercentage = attendanceInfo[0];
+          presentDays = attendanceInfo[1];
+          absentDays = attendanceInfo[2];
+          totalWorkingDays = attendanceInfo[3];
+          pages = [
+            StudentHomePage(
+              name: name,
+              email: email,
+              department: department,
+              year: year,
+              presentDays: presentDays,
+              absentDays: absentDays,
+              attendancePercentage: attendancePercentage,
+              password: password,
+              rollno: rollno,
+              section: section,
+              totalWorkingDays: totalWorkingDays,
+            ),
+            const ViewResultPage(),
+            ViewStudentAttendancePage(
+              year: year,
+              dept: department,
+              section: section,
+            ),
+            const ViewTimetablePage(),
+            OdAndPermissionPage(
+                name: name,
+                email: email,
+                rollno: rollno,
+                department: department,
+                section: section,
+                year: year),
+          ];
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      print("Error loading student data: $e");
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
