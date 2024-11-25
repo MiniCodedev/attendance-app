@@ -137,11 +137,6 @@ class DatabaseServices {
           attendanceNew.addAll({
             key: allPresent([
               data.containsKey("hour_1") ? data["hour_1"] : "no",
-              data.containsKey("hour_2") ? data["hour_2"] : "no",
-              data.containsKey("hour_3") ? data["hour_3"] : "no",
-              data.containsKey("hour_4") ? data["hour_4"] : "no",
-              data.containsKey("hour_5") ? data["hour_5"] : "no",
-              data.containsKey("hour_6") ? data["hour_6"] : "no",
             ], key)
           });
         }

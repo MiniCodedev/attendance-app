@@ -1,6 +1,7 @@
 import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/auth_pages/login_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/od_and_leave_page.dart';
+import 'package:attendanceapp/pages/teacher_admin_pages/overview_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/select_class_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/view_timetable_page.dart';
 import 'package:attendanceapp/services/auth_services.dart';
@@ -20,7 +21,7 @@ class _TeacherPageState extends State<TeacherPage> {
   String name = "Unknown";
   int selected = 0;
   List pages = [
-    const SelectClassPage(),
+    const OverviewPage(),
     const ViewTimetablePage(),
   ];
   List<String> appbarTitle = [
@@ -42,7 +43,7 @@ class _TeacherPageState extends State<TeacherPage> {
     if (userUid != null) {
       var data = await DatabaseServices().gettingTeacherData(userUid);
       pages = [
-        const SelectClassPage(),
+        const OverviewPage(),
         const ViewTimetablePage(),
         ODAndLeavePage(
           classDetails: data!.data()!["assignedClass"],

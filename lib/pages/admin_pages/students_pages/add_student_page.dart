@@ -30,6 +30,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
     'B.Tech - Cyber Security',
     'B.Tech - Data Science',
     'B.Tech - AIML',
+    'B.Tech - AIDS',
     'B.Tech - ECE',
     'B.Tech - Bio Technology',
   ];
@@ -301,7 +302,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                       email = val.replaceAll(" ", "");
                     },
                     decoration: InputDecoration(
-                        hintText: "example@student.university.com",
+                        hintText: "example@student.jpr",
                         prefixIcon: Icon(
                           Icons.email,
                           color: AppColors.primaryColor,

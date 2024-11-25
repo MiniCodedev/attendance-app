@@ -261,14 +261,14 @@ class _HourTileWidgetState extends State<HourTileWidget> {
                                 ? Colors.green
                                 : Colors.red),
                       ),
-                      Text(
-                        "ID: ${widget.subtext != "Not Registered" ? widget.subtext.split(",")[1] : "Not Registered"}",
-                        style: TextStyle(
-                            fontSize: 10,
-                            color: widget.subtext != "Not Registered"
-                                ? Colors.green
-                                : Colors.red),
-                      ),
+                      // Text(
+                      //   "ID: ${widget.subtext != "Not Registered" ? widget.subtext.split(",")[1] : "Not Registered"}",
+                      //   style: TextStyle(
+                      //       fontSize: 10,
+                      //       color: widget.subtext != "Not Registered"
+                      //           ? Colors.green
+                      //           : Colors.red),
+                      // ),
                     ],
                   ),
                   const Spacer(),

@@ -7,7 +7,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class SelectClassPage extends StatefulWidget {
-  const SelectClassPage({super.key});
+  const SelectClassPage({super.key, required this.year});
+
+  final int year;
 
   @override
   State<SelectClassPage> createState() => _SelectClassPageState();
@@ -17,31 +19,31 @@ class _SelectClassPageState extends State<SelectClassPage> {
   List<String> timetable = [];
   String dayName = "";
 
-  String getTodayDayName() {
-    DateTime now = DateTime.now();
-    return getDayName(now.weekday);
-  }
+  // String getTodayDayName() {
+  //   DateTime now = DateTime.now();
+  //   return getDayName(now.weekday);
+  // }
 
-  String getDayName(int weekday) {
-    switch (weekday) {
-      case DateTime.monday:
-        return "monday";
-      case DateTime.tuesday:
-        return "tuesday";
-      case DateTime.wednesday:
-        return "wednesday";
-      case DateTime.thursday:
-        return "thursday";
-      case DateTime.friday:
-        return "friday";
-      case DateTime.saturday:
-        return "saturday";
-      case DateTime.sunday:
-        return "sunday";
-      default:
-        return "Unknown";
-    }
-  }
+  // String getDayName(int weekday) {
+  //   switch (weekday) {
+  //     case DateTime.monday:
+  //       return "monday";
+  //     case DateTime.tuesday:
+  //       return "tuesday";
+  //     case DateTime.wednesday:
+  //       return "wednesday";
+  //     case DateTime.thursday:
+  //       return "thursday";
+  //     case DateTime.friday:
+  //       return "friday";
+  //     case DateTime.saturday:
+  //       return "saturday";
+  //     case DateTime.sunday:
+  //       return "sunday";
+  //     default:
+  //       return "Unknown";
+  //   }
+  // }
 
   // @override
   // void initState() {
