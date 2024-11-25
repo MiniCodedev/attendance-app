@@ -2,7 +2,7 @@ import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/auth_pages/login_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/od_and_leave_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/overview_page.dart';
-import 'package:attendanceapp/pages/teacher_admin_pages/select_class_page.dart';
+// import 'package:attendanceapp/pages/teacher_admin_pages/select_class_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/view_timetable_page.dart';
 import 'package:attendanceapp/services/auth_services.dart';
 import 'package:attendanceapp/services/database_services.dart';
