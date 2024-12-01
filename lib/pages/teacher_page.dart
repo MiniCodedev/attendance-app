@@ -42,11 +42,12 @@ class _TeacherPageState extends State<TeacherPage> {
 
     if (userUid != null) {
       var data = await DatabaseServices().gettingTeacherData(userUid);
+      print(data!.data()!["assignedClass"]);
       pages = [
         const OverviewPage(),
         const ViewTimetablePage(),
         ODAndLeavePage(
-          classDetails: data!.data()!["assignedClass"],
+          classDetails: data.data()!["assignedClass"],
         ),
       ];
     }

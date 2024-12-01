@@ -1,6 +1,6 @@
 import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/view_permission_letter_page.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ODAndLeavePage extends StatefulWidget {
@@ -15,56 +15,57 @@ class ODAndLeavePage extends StatefulWidget {
 class _ODAndLeavePageState extends State<ODAndLeavePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("No data found"),
-      ),
-      // body: StreamBuilder(
-      //   stream: FirebaseFirestore.instance
-      //       .collection("odAndLeave")
-      //       .where("classdetails", isEqualTo: widget.classDetails)
-      //       .where("status", isNull: true)
-      //       .orderBy("date", descending: true)
-      //       .snapshots(),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.connectionState == ConnectionState.waiting) {
-      //       return const Center(child: CircularProgressIndicator());
-      //     }
-      //     if (snapshot.data!.docs.isEmpty) {
-      //       return const Center(
-      //         child: Text("No leave or OD permission applied."),
-      //       );
-      //     }
+    return Scaffold(
+      body: widget.classDetails == null
+          ? const Center(
+              child: Text("No data found"),
+            )
+          : StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("odAndLeave")
+                  .where("classdetails", isEqualTo: widget.classDetails)
+                  .where("status", isNull: true)
+                  .orderBy("date", descending: true)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.data!.docs.isEmpty) {
+                  return const Center(
+                    child: Text("No leave or OD permission applied."),
+                  );
+                }
 
-      //     var data = snapshot.data?.docs;
-      //     return ListView.builder(
-      //       itemCount: data!.length,
-      //       itemBuilder: (context, index) {
-      //         Map data_ = data[index].data() as Map;
-      //         String sub = data_["sub"];
-      //         Timestamp timestamp = data_['date'] ?? Timestamp(1, 1);
-      //         DateTime dateTime = timestamp.toDate();
-      //         String date =
-      //             "${dateTime.day}/${dateTime.month}/${dateTime.year}";
-      //         String content = data_["content"];
-      //         String name = data_["name"];
-      //         String rollno = data_["rollno"];
+                var data = snapshot.data?.docs;
+                return ListView.builder(
+                  itemCount: data!.length,
+                  itemBuilder: (context, index) {
+                    Map data_ = data[index].data() as Map;
+                    String sub = data_["sub"];
+                    Timestamp timestamp = data_['date'] ?? Timestamp(1, 1);
+                    DateTime dateTime = timestamp.toDate();
+                    String date =
+                        "${dateTime.day}/${dateTime.month}/${dateTime.year}";
+                    String content = data_["content"];
+                    String name = data_["name"];
+                    String rollno = data_["rollno"];
 
-      //         return Padding(
-      //           padding: const EdgeInsets.all(10.0),
-      //           child: permissionTileWidget(
-      //             id: data[index].id,
-      //             name: name,
-      //             rollno: rollno,
-      //             content: content,
-      //             sub: sub,
-      //             date: date,
-      //           ),
-      //         );
-      //       },
-      //     );
-      //   },
-      // ),
+                    return Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: permissionTileWidget(
+                        id: data[index].id,
+                        name: name,
+                        rollno: rollno,
+                        content: content,
+                        sub: sub,
+                        date: date,
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
     );
   }
 
