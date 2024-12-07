@@ -20,7 +20,6 @@ class StudentHomePage extends StatefulWidget {
 
   final String email;
   final String name;
-
   final String department;
   final int year;
   final int presentDays;
@@ -84,7 +83,6 @@ class _StudentHomePageState extends State<StudentHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     attendancePercentage = (presentDays / totalWorkingDays) * 100;
     return isLoading
         ? const Center(
@@ -165,61 +163,11 @@ class _StudentHomePageState extends State<StudentHomePage> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Column(
-                    children: [
-                      const SizedBox(height: 10),
-                      cardTile(Icons.assignment_ind_rounded, rollno, width),
-                      const SizedBox(height: 10),
-                      cardTile(Icons.person, name, width),
-                      const SizedBox(height: 10),
-                      cardTile(Icons.email_rounded, email, width),
-                      const SizedBox(height: 10),
-                      cardTile(Icons.password_rounded, password, width),
-                      const SizedBox(height: 10),
-                      cardTile(Icons.group, "Section $section", width),
-                      const SizedBox(height: 10),
-                      cardTile(Icons.school_rounded, department, width),
-                      const SizedBox(height: 10),
-                      cardTile(icons_[year - 1], years[year - 1], width),
-                    ],
-                  ),
                 ],
               ),
             ),
           );
   }
-}
-
-Widget cardTile(IconData icon, String text, double width) {
-  return Container(
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-        color: AppColors.primaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(20))),
-    child: Row(
-      children: [
-        Icon(
-          icon,
-          color: Colors.white,
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        SizedBox(
-          width: width / 1.5,
-          child: Text(
-            text,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: const TextStyle(color: Colors.white),
-          ),
-        )
-      ],
-    ),
-  );
 }
 
 Widget buildAttendanceCard(String title, String value, Color color) {

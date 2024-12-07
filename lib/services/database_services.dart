@@ -96,6 +96,20 @@ class DatabaseServices {
     }
   }
 
+  Future<bool> changePasswordInDatabase(
+      String uid, String password, bool isStudent) async {
+    try {
+      if (isStudent) {
+        await studentsCollection.doc(uid).update({"password": password});
+      } else {
+        await teachersCollection.doc(uid).update({"password": password});
+      }
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<bool> hourlyRegisterAttendance(
     String docId,
     int year,

@@ -1,6 +1,7 @@
 import "package:attendanceapp/core/theme/app_colors.dart";
 import "package:attendanceapp/pages/auth_pages/login_page.dart";
 import "package:attendanceapp/pages/student_admin_pages/od_and_permission_page.dart";
+import "package:attendanceapp/pages/student_admin_pages/settings_page.dart";
 import "package:attendanceapp/pages/student_admin_pages/student_home_page.dart";
 import "package:attendanceapp/pages/student_admin_pages/view_result_page.dart";
 import "package:attendanceapp/pages/student_admin_pages/view_student_attendance_page.dart";
@@ -43,6 +44,7 @@ class _StudentPageState extends State<StudentPage> {
     "View attedance",
     "View timetable",
     "OD & Leave Permission",
+    "Settings",
   ];
 
   List<String> years = [
@@ -118,6 +120,14 @@ class _StudentPageState extends State<StudentPage> {
                 rollno: rollno,
                 department: department,
                 section: section,
+                year: year),
+            SettingsPage(
+                name: name,
+                email: email,
+                password: password,
+                section: section,
+                rollno: rollno,
+                department: department,
                 year: year),
           ];
           isLoading = false;
@@ -211,6 +221,17 @@ class _StudentPageState extends State<StudentPage> {
               },
               title: const Text("OD & Leave Permission"),
               leading: const Icon(Icons.assignment),
+            ),
+            ListTile(
+              selected: selected == 5,
+              onTap: () {
+                setState(() {
+                  selected = 5;
+                });
+                Navigator.of(context).pop();
+              },
+              title: const Text("Settings"),
+              leading: const Icon(Icons.settings),
             ),
             Expanded(
               child: Align(

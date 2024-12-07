@@ -42,6 +42,26 @@ class AuthServices {
     }
   }
 
+  Future<bool> changePassword(
+      String email, String password, String newPassword, bool isStudent) async {
+    try {
+      User user = (await authFirebase.signInWithEmailAndPassword(
+              email: email, password: password))
+          .user!;
+
+      if (user == null) {
+        throw Exception('No user is signed in.');
+      }
+
+      await user.updatePassword(newPassword);
+      await databaseServices.changePasswordInDatabase(
+          user.uid, newPassword, isStudent);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future deleteAcc(String email, String password) async {
     try {
       User user = (await authFirebase.signInWithEmailAndPassword(
