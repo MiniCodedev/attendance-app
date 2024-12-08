@@ -23,7 +23,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     if (formKey.currentState!.validate()) {
       showLoadingDialog(context);
       AuthServices()
-          .changePassword(widget.email, widget.password, newPassword, true)
+          .changePassword(widget.email, widget.password, newPassword, false)
           .then(
         (value) {
           Navigator.pop(context);

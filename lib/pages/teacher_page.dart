@@ -2,8 +2,9 @@ import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/auth_pages/login_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/od_and_leave_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/overview_page.dart';
+import 'package:attendanceapp/pages/teacher_admin_pages/settings_page.dart';
 // import 'package:attendanceapp/pages/teacher_admin_pages/select_class_page.dart';
-import 'package:attendanceapp/pages/teacher_admin_pages/view_timetable_page.dart';
+import 'package:attendanceapp/pages/teacher_admin_pages/view_teacher_timetable_page.dart';
 import 'package:attendanceapp/services/auth_services.dart';
 import 'package:attendanceapp/services/database_services.dart';
 import 'package:attendanceapp/services/helper.dart';
@@ -20,14 +21,13 @@ class _TeacherPageState extends State<TeacherPage> {
   String email = "";
   String name = "Unknown";
   int selected = 0;
-  List pages = [
-    const OverviewPage(),
-    const ViewTimetablePage(),
-  ];
+  List pages = [];
+  bool isloading = true;
   List<String> appbarTitle = [
     "Overview",
     "Timetable",
     "OD & Leave Permission",
+    "Settings",
   ];
 
   Future<bool> _initializeUserData() async {
@@ -42,15 +42,25 @@ class _TeacherPageState extends State<TeacherPage> {
 
     if (userUid != null) {
       var data = await DatabaseServices().gettingTeacherData(userUid);
-      print(data!.data()!["assignedClass"]);
+      String password = data!.data()!["password"];
+      String id = data.data()!["id"];
       pages = [
-        const OverviewPage(),
-        const ViewTimetablePage(),
+        OverviewPage(
+            teacherUid: data.data()!["uid"],
+            assignedClass: data.data()!["assignedClass"]),
+        ViewTeacherTimetablePage(
+          teacherUid: data.data()!["uid"],
+        ),
         ODAndLeavePage(
           classDetails: data.data()!["assignedClass"],
         ),
+        SettingsPage(name: name, email: email, password: password, id: id),
       ];
     }
+
+    setState(() {
+      isloading = false;
+    });
 
     return true;
   }
@@ -64,83 +74,97 @@ class _TeacherPageState extends State<TeacherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(appbarTitle[selected]),
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: Colors.white,
-      ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                color: AppColors.primaryColor,
-              ),
-              accountName: Text(
-                  "${name[0].toUpperCase()}${name.substring(1).toLowerCase()}"),
-              accountEmail: Text(email),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Text(
-                  name == "" ? " " : name[0],
-                  style:
-                      TextStyle(fontSize: 40.0, color: AppColors.primaryColor),
-                ),
-              ),
-            ),
-            ListTile(
-              selected: selected == 0 ? true : false,
-              onTap: () {
-                setState(() {
-                  selected = 0;
-                });
-                Navigator.pop(context);
-              },
-              leading: const Icon(Icons.home),
-              title: const Text("Overview"),
-            ),
-            ListTile(
-              selected: selected == 1 ? true : false,
-              onTap: () {
-                setState(() {
-                  selected = 1;
-                });
-                Navigator.pop(context);
-              },
-              leading: const Icon(Icons.table_chart_rounded),
-              title: const Text("TimeTable"),
-            ),
-            ListTile(
-              selected: selected == 2 ? true : false,
-              onTap: () {
-                setState(() {
-                  selected = 2;
-                });
-                Navigator.pop(context);
-              },
-              leading: const Icon(Icons.assignment),
-              title: const Text("OD & Leave Permission"),
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: ListTile(
-                  leading: const Icon(Icons.logout),
-                  title: const Text('Logout'),
-                  onTap: () {
-                    AuthServices().signOut();
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ));
-                  },
-                ),
-              ),
-            ),
-          ],
+        appBar: AppBar(
+          title: Text(appbarTitle[selected]),
+          backgroundColor: AppColors.primaryColor,
+          foregroundColor: Colors.white,
         ),
-      ),
-      body: pages[selected],
-    );
+        drawer: Drawer(
+          child: Column(
+            children: [
+              UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                ),
+                accountName: Text(
+                    "${name[0].toUpperCase()}${name.substring(1).toLowerCase()}"),
+                accountEmail: Text(email),
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Text(
+                    name == "" ? " " : name[0],
+                    style: TextStyle(
+                        fontSize: 40.0, color: AppColors.primaryColor),
+                  ),
+                ),
+              ),
+              ListTile(
+                selected: selected == 0 ? true : false,
+                onTap: () {
+                  setState(() {
+                    selected = 0;
+                  });
+                  Navigator.pop(context);
+                },
+                leading: const Icon(Icons.home),
+                title: const Text("Overview"),
+              ),
+              ListTile(
+                selected: selected == 1 ? true : false,
+                onTap: () {
+                  setState(() {
+                    selected = 1;
+                  });
+                  Navigator.pop(context);
+                },
+                leading: const Icon(Icons.table_chart_rounded),
+                title: const Text("TimeTable"),
+              ),
+              ListTile(
+                selected: selected == 2 ? true : false,
+                onTap: () {
+                  setState(() {
+                    selected = 2;
+                  });
+                  Navigator.pop(context);
+                },
+                leading: const Icon(Icons.assignment),
+                title: const Text("OD & Leave Permission"),
+              ),
+              ListTile(
+                selected: selected == 3 ? true : false,
+                onTap: () {
+                  setState(() {
+                    selected = 3;
+                  });
+                  Navigator.pop(context);
+                },
+                leading: const Icon(Icons.settings),
+                title: const Text("Settings"),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ListTile(
+                    leading: const Icon(Icons.logout),
+                    title: const Text('Logout'),
+                    onTap: () {
+                      AuthServices().signOut();
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ));
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: isloading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : pages[selected]);
   }
 }
 

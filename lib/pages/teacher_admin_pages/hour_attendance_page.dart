@@ -136,6 +136,7 @@ class _HourAttendancePageState extends State<HourAttendancePage> {
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(10),
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: ElevatedButton.icon(
           icon: const Icon(Icons.cloud_upload_outlined),
           label: const Text("Save attendance"),
@@ -177,7 +178,8 @@ class _HourAttendancePageState extends State<HourAttendancePage> {
             )
           : Column(
               children: [
-                Padding(
+                Container(
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     controller: _searchController,
