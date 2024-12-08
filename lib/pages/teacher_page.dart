@@ -52,7 +52,7 @@ class _TeacherPageState extends State<TeacherPage> {
           teacherUid: data.data()!["uid"],
         ),
         ODAndLeavePage(
-          classDetails: data.data()!["assignedClass"],
+          classDetails: data.data()!["assignedClass"][0],
         ),
         SettingsPage(name: name, email: email, password: password, id: id),
       ];

@@ -10,7 +10,7 @@ class OverviewPage extends StatefulWidget {
   const OverviewPage(
       {super.key, required this.teacherUid, required this.assignedClass});
   final String teacherUid;
-  final String assignedClass;
+  final List assignedClass;
 
   @override
   State<OverviewPage> createState() => _OverviewPageState();
@@ -106,32 +106,40 @@ class _OverviewPageState extends State<OverviewPage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            AssignedClass(
-              dept: widget.assignedClass.split("_")[2],
-              section: widget.assignedClass.split("_").last,
-              icon: Icons.school_rounded,
-              color: AppColors.secondaryColor,
-              year: int.tryParse(widget.assignedClass.split("_")[1])!,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Today's Attendance",
-              style: TextStyle(
-                color: AppColors.primaryColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ListView.builder(
+                itemCount: widget.assignedClass.length,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  String classDetails = widget.assignedClass[index];
+                  return AssignedClass(
+                    dept: classDetails.split("_")[2],
+                    section: classDetails.split("_").last,
+                    icon: Icons.school_rounded,
+                    color: AppColors.secondaryColor,
+                    year: int.tryParse(classDetails.split("_")[1])!,
+                  );
+                },
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Expanded(
-              child: FutureBuilder<List<Map<String, String>>>(
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Today's Attendance",
+                style: TextStyle(
+                  color: AppColors.primaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              FutureBuilder<List<Map<String, String>>>(
                 future: fetchTeacherTimetable(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -145,6 +153,8 @@ class _OverviewPageState extends State<OverviewPage> {
 
                     return ListView.builder(
                       itemCount: timetable.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         final entry = timetable[index];
                         return Department(
@@ -162,8 +172,8 @@ class _OverviewPageState extends State<OverviewPage> {
                   }
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
