@@ -158,7 +158,7 @@ class _OverviewPageState extends State<OverviewPage> {
                       itemBuilder: (context, index) {
                         final entry = timetable[index];
                         return Department(
-                          hour: index + 1,
+                          hour: int.tryParse(entry["hour"]!)!,
                           dept: "${entry["course"]?.split("_")[1]}",
                           section: entry["course"]!.split("_")[2],
                           icon: hourIcon[(int.tryParse(entry["hour"]!)! - 1)],
