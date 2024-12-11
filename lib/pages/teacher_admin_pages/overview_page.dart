@@ -116,6 +116,7 @@ class _OverviewPageState extends State<OverviewPage> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   String classDetails = widget.assignedClass[index];
+                  print(classDetails.split("_")[2]);
                   return AssignedClass(
                     dept: classDetails.split("_")[2],
                     section: classDetails.split("_").last,

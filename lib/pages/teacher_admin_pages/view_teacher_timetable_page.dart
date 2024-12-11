@@ -19,16 +19,9 @@ class _ViewTeacherTimetablePageState extends State<ViewTeacherTimetablePage> {
     "Thursday",
     "Friday"
   ];
-  Map<String, List<Map<String, String>>> teacherTimetable =
-      {}; // day -> [{hour, course, subject}]
+  Map<String, List<Map<String, String>>> teacherTimetable = {};
 
-  @override
-  void initState() {
-    super.initState();
-    fetchTeacherTimetable();
-  }
-
-  Future<void> fetchTeacherTimetable() async {
+  Future<Map<String, List<Map<String, String>>>> fetchTeacherTimetable() async {
     try {
       final firestore = FirebaseFirestore.instance;
 
@@ -86,56 +79,62 @@ class _ViewTeacherTimetablePageState extends State<ViewTeacherTimetablePage> {
         }
       }
 
-      setState(() {
-        teacherTimetable = tempTimetable;
-      });
+      return tempTimetable;
     } catch (e) {
-      print("Error fetching teacher timetable: $e");
+      return {};
     }
-  }
-
-  String formatCourseName(String course) {
-    final parts = course.split('_');
-    if (parts.length < 3) return course;
-
-    final year = parts[0];
-    final program = parts[1];
-    final section = parts[2];
-
-    final yearNumber = year[0]; // First character (e.g., 3 from "3_B.Tech")
-    var formattedProgram = program; // Ensure proper format
-    final sectionName = section.substring(0, 1); // Get section letter (e.g., A)
-
-    return "$formattedProgram - ${sectionName.toUpperCase()} \n (year $yearNumber)";
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: teacherTimetable.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ListView.builder(
-                itemCount: days.length,
-                itemBuilder: (context, index) {
-                  final day = days[index].toLowerCase();
-                  final schedule = teacherTimetable[day] ?? [];
+      body: FutureBuilder<Map<String, List<Map<String, String>>>>(
+        future: fetchTeacherTimetable(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (snapshot.hasError) {
+            return const Center(
+              child: Text("Something went wrong."),
+            );
+          }
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(
+              child: Text("There is no timetable available."),
+            );
+          }
 
-                  return Card(
-                    elevation: 3,
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            days[index],
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 8),
+          // Use snapshot.data directly
+          final timetableData = snapshot.data!;
+
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListView.builder(
+              itemCount: days.length,
+              itemBuilder: (context, index) {
+                final day = days[index].toLowerCase();
+                final schedule = timetableData[day] ?? []; // Use snapshot data
+
+                return Card(
+                  elevation: 3,
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          days[index],
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 8),
+                        if (schedule.isEmpty)
+                          const Text("No schedule for this day."),
+                        if (schedule.isNotEmpty)
                           Table(
                             border: TableBorder.all(),
                             columnWidths: const {
@@ -144,7 +143,6 @@ class _ViewTeacherTimetablePageState extends State<ViewTeacherTimetablePage> {
                               2: FractionColumnWidth(0.4), // Subject
                             },
                             children: [
-                              // Header Row
                               const TableRow(
                                 children: [
                                   Padding(
@@ -168,7 +166,6 @@ class _ViewTeacherTimetablePageState extends State<ViewTeacherTimetablePage> {
                                   ),
                                 ],
                               ),
-                              // Data Rows
                               ...schedule.map((entry) {
                                 return TableRow(
                                   children: [
@@ -178,11 +175,7 @@ class _ViewTeacherTimetablePageState extends State<ViewTeacherTimetablePage> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        formatCourseName(entry['course']!),
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(fontSize: 12),
-                                      ),
+                                      child: Text(entry['course']!),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -193,13 +186,15 @@ class _ViewTeacherTimetablePageState extends State<ViewTeacherTimetablePage> {
                               }),
                             ],
                           ),
-                        ],
-                      ),
+                      ],
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
+          );
+        },
+      ),
     );
   }
 }
