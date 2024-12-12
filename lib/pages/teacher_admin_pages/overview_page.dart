@@ -1,6 +1,5 @@
 import 'package:attendanceapp/core/theme/app_colors.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/attendance_page.dart';
-import 'package:attendanceapp/pages/teacher_admin_pages/hour_attendance_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/student_list_page.dart';
 import 'package:attendanceapp/pages/teacher_admin_pages/view_attendance_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,15 +16,6 @@ class OverviewPage extends StatefulWidget {
 }
 
 class _OverviewPageState extends State<OverviewPage> {
-  List hourIcon = [
-    Icons.looks_one_rounded,
-    Icons.looks_two_rounded,
-    Icons.looks_3_rounded,
-    Icons.looks_4_rounded,
-    Icons.looks_5_rounded,
-    Icons.looks_6_rounded,
-  ];
-
   Future<List<Map<String, String>>> fetchTeacherTimetable() async {
     List<Map<String, String>>? timetable;
     try {
@@ -162,7 +152,7 @@ class _OverviewPageState extends State<OverviewPage> {
                           hour: int.tryParse(entry["hour"]!)!,
                           dept: "${entry["course"]?.split("_")[1]}",
                           section: entry["course"]!.split("_")[2],
-                          icon: hourIcon[(int.tryParse(entry["hour"]!)! - 1)],
+                          icon: Icons.school_rounded,
                           color: AppColors.secondaryColor,
                           year: int.tryParse(
                                   entry["course"]?.split("_")[0] ?? "1") ??
@@ -503,16 +493,11 @@ class _DepartmentState extends State<Department> {
                         optionName: "Register attendance",
                         icon: Icons.assignment_add,
                         onTap: () {
-                          var dateTime = DateTime.now();
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => HourAttendancePage(
-                              hour: widget.hour,
-                              dept: widget.dept,
-                              section: widget.section,
-                              year: widget.year,
-                              date:
-                                  "${dateTime.day.toString().length == 1 ? "0${dateTime.day}" : dateTime.day.toString()}-${dateTime.month.toString().length == 1 ? "0${dateTime.month}" : dateTime.month.toString()}-${dateTime.year}",
-                            ),
+                            builder: (context) => AttendancePage(
+                                year: widget.year,
+                                dept: widget.dept,
+                                section: widget.section),
                           ));
                         }),
                   ],
